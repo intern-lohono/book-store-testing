@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package books;
+
+message Book {
+  string bookName = 1;
+  int32 priorityValue = 2;
+  string duration = 3;
+}
+
+message Empty {}
+
+message AddBookResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+service BookService {
+  rpc getBooks (Empty) returns (stream Book);
+  rpc addBook (Book) returns (AddBookResponse);
+}
