@@ -15,7 +15,12 @@ class DynamicFormScreen extends StatelessWidget {
             "default_value": "",
             "label": "Book Title",
             "type": "dropdown",
-            "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+            "options": [
+              "A Suitable Boy",
+              "The Guide",
+              "Clear Light of Day",
+              "The Inheritance of Loss"
+            ]
           },
           {"id": "author", "default_value": "", "label": "Author Name"},
           {"id": "priority", "default_value": "", "label": "Priority"},
@@ -32,7 +37,12 @@ class DynamicFormScreen extends StatelessWidget {
             "default_value": "",
             "label": "Book Title",
             "type": "dropdown",
-            "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+            "options": [
+              "A Suitable Boy",
+              "The Guide",
+              "Clear Light of Day",
+              "The Inheritance of Loss"
+            ]
           },
           {"id": "author", "default_value": "", "label": "Author Name"},
           {"id": "priority", "default_value": "", "label": "Priority"},
@@ -49,7 +59,12 @@ class DynamicFormScreen extends StatelessWidget {
             "default_value": "",
             "label": "Book Title",
             "type": "dropdown",
-            "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+            "options": [
+              "A Suitable Boy",
+              "The Guide",
+              "Clear Light of Day",
+              "The Inheritance of Loss"
+            ]
           },
           {"id": "author", "default_value": "", "label": "Author Name"},
           {"id": "priority", "default_value": "", "label": "Priority"},
@@ -71,8 +86,6 @@ class DynamicFormScreen extends StatelessWidget {
       body: DynamicForm(
         isDraftTicket: false,
         data: formConfigs[randomIndex],
-        draftTaskSpocs: [],
-        disabledForm: false,
       ),
     );
   }

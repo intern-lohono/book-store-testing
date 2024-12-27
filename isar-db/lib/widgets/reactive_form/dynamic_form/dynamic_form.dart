@@ -4,14 +4,10 @@ import 'package:reactive_forms/reactive_forms.dart';
 class DynamicForm extends StatefulWidget {
   final List<Map<String, dynamic>> data;
   final bool isDraftTicket;
-  final bool disabledForm;
-  final List<dynamic> draftTaskSpocs;
 
   DynamicForm({
     required this.data,
     required this.isDraftTicket,
-    required this.disabledForm,
-    required this.draftTaskSpocs,
   });
 
   @override
@@ -19,16 +15,45 @@ class DynamicForm extends StatefulWidget {
 }
 
 class _DynamicFormState extends State<DynamicForm> {
-  late FormGroup _form;
-  final List<Map<String, dynamic>> _dynamicFields = [];
+  late FormGroup form;
+  final List<Map<String, dynamic>> dynamicFields = [];
 
   @override
   void initState() {
     super.initState();
-    _form = _createForm();
+    form = createForm();
   }
 
-  FormGroup _createForm() {
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveForm(
+      formGroup: form,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            ...buildFormFields(),
+            ...dynamicFields.map(
+              (field) => ReactiveTextField(
+                formControlName: field['id'],
+                decoration: InputDecoration(labelText: field['label']),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: form.valid
+                  ? () {
+                      final formData = form.value;
+                      print('Form Data: $formData');
+                    }
+                  : null,
+              child: Text("Submit"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  FormGroup createForm() {
     final controls = <String, FormControl>{};
     for (final field in widget.data[0]['form_data'] ?? []) {
       controls[field['id']] = FormControl<String>(
@@ -39,71 +64,46 @@ class _DynamicFormState extends State<DynamicForm> {
     return FormGroup(controls);
   }
 
-  void _onTitleChanged(String? value) {
-    if (value == "Option 3" || value == "Option 4") {
-      if (!_dynamicFields.any((field) => field['id'] == 'new_field')) {
+  List<Widget> buildFormFields() {
+    return widget.data[0]['form_data'].map<Widget>((field) {
+      if (field['type'] == 'dropdown') {
+        return ReactiveDropdownField<String>(
+          formControlName: field['id'],
+          decoration: InputDecoration(labelText: field['label']),
+          items: (field['options'] as List<String>)
+              .map((option) => DropdownMenuItem(
+                    value: option,
+                    child: Text(option),
+                  ))
+              .toList(),
+          onChanged: (control) => onTitleChanged(control.value),
+        );
+      } else {
+        return ReactiveTextField(
+          formControlName: field['id'],
+          decoration: InputDecoration(labelText: field['label']),
+        );
+      }
+    }).toList();
+  }
+
+  void onTitleChanged(String? value) {
+    if (value == "Clear Light of Day" || value == "The Inheritance of Loss") {
+      if (!dynamicFields.any((field) => field['id'] == 'edition')) {
         setState(() {
-          _dynamicFields.add({"id": "new_field", "label": "Edition"});
-          _form.addAll({
-            'new_field': FormControl<String>(value: '', validators: []),
+          dynamicFields.add({"id": "edition", "label": "Edition"});
+          form.addAll({
+            'edition': FormControl<String>(value: '', validators: []),
           });
         });
       }
     } else {
-      if (_dynamicFields.any((field) => field['id'] == 'new_field')) {
+      if (dynamicFields.any((field) => field['id'] == 'edition')) {
         setState(() {
-          _dynamicFields.removeWhere((field) => field['id'] == 'new_field');
-          _form.removeControl('new_field');
+          dynamicFields.removeWhere((field) => field['id'] == 'edition');
+          form.removeControl('edition');
         });
       }
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ReactiveForm(
-      formGroup: _form,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ...widget.data[0]['form_data'].map<Widget>((field) {
-              if (field['type'] == 'dropdown') {
-                return ReactiveDropdownField<String>(
-                  formControlName: field['id'],
-                  decoration: InputDecoration(labelText: field['label']),
-                  items: (field['options'] as List<String>)
-                      .map((option) => DropdownMenuItem(
-                            value: option,
-                            child: Text(option),
-                          ))
-                      .toList(),
-                  onChanged: (control) => _onTitleChanged(control.value),
-                );
-              } else {
-                return ReactiveTextField(
-                  formControlName: field['id'],
-                  decoration: InputDecoration(labelText: field['label']),
-                );
-              }
-            }).toList(),
-            ..._dynamicFields.map(
-              (field) => ReactiveTextField(
-                formControlName: field['id'],
-                decoration: InputDecoration(labelText: field['label']),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: _form.valid
-                  ? () {
-                      final formData = _form.value;
-                      print('Form Data: $formData');
-                    }
-                  : null,
-              child: Text("Submit"),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
