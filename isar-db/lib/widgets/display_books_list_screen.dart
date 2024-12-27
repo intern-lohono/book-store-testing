@@ -25,14 +25,14 @@ class _DisplayBooksListScreenState
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: const Color.fromARGB(255, 0, 0, 0)),
         title: Text(
           "Books List",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
         ),
         backgroundColor: Colors.orange,
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -44,7 +44,9 @@ class _DisplayBooksListScreenState
                   children: [
                     Text(
                       "Books Store",
-                      style: TextStyle(fontSize: 24, color: Colors.white),
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: const Color.fromARGB(255, 0, 0, 0)),
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -67,7 +69,8 @@ class _DisplayBooksListScreenState
               booksList.isEmpty
                   ? Text(
                       "No books available",
-                      style: TextStyle(color: Colors.white),
+                      style:
+                          TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
                     )
                   : ListView.builder(
                       shrinkWrap: true,
@@ -80,7 +83,9 @@ class _DisplayBooksListScreenState
                           margin: EdgeInsets.all(10),
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            border: Border.all(width: 2, color: Colors.white),
+                            border: Border.all(
+                                width: 2,
+                                color: const Color.fromARGB(255, 0, 0, 0)),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Column(
@@ -89,7 +94,8 @@ class _DisplayBooksListScreenState
                               Text(
                                 bookModel.bookName,
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
+                                    color: const Color.fromARGB(255, 0, 0, 0),
+                                    fontSize: 14),
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -100,12 +106,16 @@ class _DisplayBooksListScreenState
                                       Text(
                                         "Time - ",
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
+                                            color: const Color.fromARGB(
+                                                255, 0, 0, 0),
+                                            fontSize: 12),
                                       ),
                                       Text(
                                         bookModel.duration,
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
+                                            color: const Color.fromARGB(
+                                                255, 0, 0, 0),
+                                            fontSize: 12),
                                       ),
                                     ],
                                   ),
@@ -114,7 +124,9 @@ class _DisplayBooksListScreenState
                                       Text(
                                         "Priority: ${bookModel.priorityValue}",
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
+                                            color: const Color.fromARGB(
+                                                255, 0, 0, 0),
+                                            fontSize: 12),
                                       ),
                                     ],
                                   ),

@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:letstalkbooksfinished/widgets/reactive_form/dynamic_form/dynamic_form.dart';
-import 'dart:math';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class DynamicFormScreen extends StatelessWidget {
   final List<List<Map<String, dynamic>>> formConfigs = [
@@ -8,15 +10,16 @@ class DynamicFormScreen extends StatelessWidget {
       {
         "id": "book_form_1",
         "form_data": [
-          {"id": "title", "default_value": "", "label": "Book Title"},
+          {
+            "id": "title",
+            "default_value": "",
+            "label": "Book Title",
+            "type": "dropdown",
+            "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+          },
           {"id": "author", "default_value": "", "label": "Author Name"},
           {"id": "priority", "default_value": "", "label": "Priority"},
-          {
-            "id": "publisher",
-            "default_value": "",
-            "label": "Publisher",
-            "optional": true
-          },
+          {"id": "publisher", "default_value": "", "label": "Publisher"},
         ],
       }
     ],
@@ -24,15 +27,16 @@ class DynamicFormScreen extends StatelessWidget {
       {
         "id": "book_form_2",
         "form_data": [
-          {"id": "title", "default_value": "", "label": "Book Title"},
+          {
+            "id": "title",
+            "default_value": "",
+            "label": "Book Title",
+            "type": "dropdown",
+            "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+          },
           {"id": "author", "default_value": "", "label": "Author Name"},
           {"id": "priority", "default_value": "", "label": "Priority"},
-          {
-            "id": "genre",
-            "default_value": "",
-            "label": "Book Genre",
-            "optional": true
-          },
+          {"id": "genre", "default_value": "", "label": "Book Genre"},
         ],
       }
     ],
@@ -40,15 +44,16 @@ class DynamicFormScreen extends StatelessWidget {
       {
         "id": "book_form_3",
         "form_data": [
-          {"id": "title", "default_value": "", "label": "Book Title"},
+          {
+            "id": "title",
+            "default_value": "",
+            "label": "Book Title",
+            "type": "dropdown",
+            "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+          },
           {"id": "author", "default_value": "", "label": "Author Name"},
           {"id": "priority", "default_value": "", "label": "Priority"},
-          {
-            "id": "rating",
-            "default_value": "",
-            "label": "Rating",
-            "optional": true
-          },
+          {"id": "rating", "default_value": "", "label": "Rating"},
         ],
       }
     ],

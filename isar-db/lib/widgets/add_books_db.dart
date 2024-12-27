@@ -23,7 +23,7 @@ class _AddBookDBScreenState extends ConsumerState<AddBookDBScreen> {
         title: Text("Add New Book"),
         backgroundColor: Colors.orange,
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ReactiveForm(
@@ -37,15 +37,15 @@ class _AddBookDBScreenState extends ConsumerState<AddBookDBScreen> {
                   formControlName: 'bookName',
                   decoration: InputDecoration(
                     labelText: "Book Name",
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(color: Colors.black),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.orange),
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   validationMessages: {
                     ValidationMessage.required: (_) =>
                         'Please enter a book name',
@@ -57,15 +57,15 @@ class _AddBookDBScreenState extends ConsumerState<AddBookDBScreen> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     labelText: "Priority (1-5)",
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(color: Colors.black),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.orange),
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   validationMessages: {
                     ValidationMessage.required: (_) =>
                         'Please enter a priority',
@@ -81,15 +81,15 @@ class _AddBookDBScreenState extends ConsumerState<AddBookDBScreen> {
                   formControlName: 'duration',
                   decoration: InputDecoration(
                     labelText: "Duration (e.g., 3h 30m)",
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(color: Colors.black),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.orange),
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   validationMessages: {
                     ValidationMessage.required: (_) =>
                         'Please enter a duration',
