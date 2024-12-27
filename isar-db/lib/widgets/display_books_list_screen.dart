@@ -174,7 +174,11 @@ class _DisplayBooksListScreenState
       }).toList();
 
       for (var bookModel in bookModels) {
-        await _bookManager.insertABook(bookModel: bookModel);
+        final exists =
+            await _bookManager.isBookExists(bookName: bookModel.bookName);
+        if (!exists) {
+          await _bookManager.insertABook(bookModel: bookModel);
+        }
       }
 
       _loadBooksFromIsar();

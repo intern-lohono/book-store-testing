@@ -26,4 +26,11 @@ class BookManager {
     _isar ??= Isar.getInstance();
     return _isar?.bookModels.where().findAll() ?? [];
   }
+
+  Future<bool> isBookExists({required String bookName}) async {
+    _isar ??= Isar.getInstance();
+    final existingBook =
+        await _isar?.bookModels.filter().bookNameEqualTo(bookName).findFirst();
+    return existingBook != null;
+  }
 }
