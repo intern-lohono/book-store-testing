@@ -31,12 +31,16 @@ class _DynamicFormState extends State<DynamicForm> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            ...buildFormFields(),
-            ...dynamicFields.map(
-              (field) => ReactiveTextField(
-                formControlName: field['id'],
-                decoration: InputDecoration(labelText: field['label']),
-              ),
+            Column(
+              children: buildFormFields(),
+            ),
+            Column(
+              children: dynamicFields.map((field) {
+                return ReactiveTextField(
+                  formControlName: field['id'],
+                  decoration: InputDecoration(labelText: field['label']),
+                );
+              }).toList(),
             ),
             ElevatedButton(
               onPressed: form.valid
@@ -65,26 +69,32 @@ class _DynamicFormState extends State<DynamicForm> {
   }
 
   List<Widget> buildFormFields() {
-    return widget.data[0]['form_data'].map<Widget>((field) {
+    final List<Widget> fields = [];
+    for (final field in widget.data[0]['form_data'] ?? []) {
       if (field['type'] == 'dropdown') {
-        return ReactiveDropdownField<String>(
-          formControlName: field['id'],
-          decoration: InputDecoration(labelText: field['label']),
-          items: (field['options'] as List<String>)
-              .map((option) => DropdownMenuItem(
-                    value: option,
-                    child: Text(option),
-                  ))
-              .toList(),
-          onChanged: (control) => onTitleChanged(control.value),
+        fields.add(
+          ReactiveDropdownField<String>(
+            formControlName: field['id'],
+            decoration: InputDecoration(labelText: field['label']),
+            items: (field['options'] as List<String>)
+                .map((option) => DropdownMenuItem(
+                      value: option,
+                      child: Text(option),
+                    ))
+                .toList(),
+            onChanged: (control) => onTitleChanged(control.value),
+          ),
         );
       } else {
-        return ReactiveTextField(
-          formControlName: field['id'],
-          decoration: InputDecoration(labelText: field['label']),
+        fields.add(
+          ReactiveTextField(
+            formControlName: field['id'],
+            decoration: InputDecoration(labelText: field['label']),
+          ),
         );
       }
-    }).toList();
+    }
+    return fields;
   }
 
   void onTitleChanged(String? value) {
