@@ -8,9 +8,7 @@ Provider<BookServiceClient> getBookService() {
   return getService((channel) => BookServiceClient(channel));
 }
 
-Provider<T> getService<T>(
-  T Function(ClientChannel channel) builder,
-) {
+Provider<T> getService<T>(T Function(ClientChannel channel) builder) {
   return RiverPod.provider(
     T.toString(),
     (ref) {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:letstalkbooksfinished/api/books.pbgrpc.dart';
-import 'package:letstalkbooksfinished/core/managers/book_manager.dart';
+import 'package:letstalkbooksfinished/isar/managers/book_manager.dart';
 import 'package:letstalkbooksfinished/widgets/add_books_db.dart';
-import 'package:letstalkbooksfinished/core/tables/book_model.dart';
+import 'package:letstalkbooksfinished/isar/tables/book_model.dart';
 import 'package:letstalkbooksfinished/providers/api/grpc_service.dart';
+import 'package:letstalkbooksfinished/widgets/fetch_data/fetch_data_screen.dart';
 import 'package:letstalkbooksfinished/widgets/reactive_form/dynamic_form/dynamic_form_screen.dart';
 import 'package:letstalkbooksfinished/widgets/reactive_form/reactive_form.dart';
 
@@ -27,7 +28,7 @@ class _DisplayBooksListScreenState
       appBar: AppBar(
         iconTheme: IconThemeData(color: const Color.fromARGB(255, 0, 0, 0)),
         title: Text(
-          "Books List",
+          "Books Store",
           style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
         ),
         backgroundColor: Colors.orange,
@@ -39,31 +40,10 @@ class _DisplayBooksListScreenState
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Books Store",
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: const Color.fromARGB(255, 0, 0, 0)),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ReactiveForm(),
-                          ),
-                        );
-                      },
-                      child: Text("Form"),
-                    ),
-                    ElevatedButton(
-                      onPressed: _fetchBooks,
-                      child: Icon(Icons.sync),
-                    ),
-                  ],
+                child: Text(
+                  "Books List",
+                  style: TextStyle(
+                      fontSize: 24, color: const Color.fromARGB(255, 0, 0, 0)),
                 ),
               ),
               booksList.isEmpty
@@ -135,21 +115,52 @@ class _DisplayBooksListScreenState
                             ],
                           ),
                         );
-                        ;
                       },
                     ),
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddBookDBScreen()),
-          );
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.sync),
+            label: 'Sync',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.edit_document),
+            label: 'Form',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.web),
+            label: 'REST',
+          ),
+        ],
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddBookDBScreen()),
+            );
+          } else if (index == 1) {
+            _fetchBooks();
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ReactiveForm()),
+            );
+          } else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FetchDataScreen()),
+            );
+          }
         },
-        child: Icon(Icons.add),
       ),
     );
   }

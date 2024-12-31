@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:letstalkbooksfinished/core/managers/book_manager.dart';
+import 'package:letstalkbooksfinished/isar/managers/book_manager.dart';
 import 'package:letstalkbooksfinished/widgets/display_books_list_screen.dart';
 
 void main() async {

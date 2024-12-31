@@ -1,2 +1,4 @@
 # Default ignored files
 nodejs-grpc-server/node_modules
+
+nodejs-rest_api-server/node_modules

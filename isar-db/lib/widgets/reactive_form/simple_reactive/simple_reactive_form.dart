@@ -57,7 +57,7 @@ class SimpleReactiveForm extends StatelessWidget {
                       borderSide: BorderSide(color: Colors.orange),
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
                   validationMessages: {
                     ValidationMessage.required: (_) =>
                         'Please enter a priority',
@@ -80,7 +80,7 @@ class SimpleReactiveForm extends StatelessWidget {
                       borderSide: BorderSide(color: Colors.orange),
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
                   validationMessages: {
                     ValidationMessage.required: (_) =>
                         'Please enter a duration',

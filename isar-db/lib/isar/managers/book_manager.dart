@@ -1,5 +1,5 @@
 import 'package:isar/isar.dart';
-import 'package:letstalkbooksfinished/core/tables/book_model.dart';
+import 'package:letstalkbooksfinished/isar/tables/book_model.dart';
 import 'package:path_provider/path_provider.dart';
 
 class BookManager {
